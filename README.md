@@ -34,6 +34,8 @@ DA_Project/
 3. **Tables and Bookcases** are loss-making sub-categories — recommend review
 4. **Consumer segment** generates highest profit
 5. **November** is the peak sales month — plan inventory accordingly
+6. **East + Technology combination generates highest sales ($264,974) 
+across all Region-Category combinations
 ---
 ---
 
