@@ -67,20 +67,20 @@ if view == "📊 Executive Summary":
     # Time Series
     monthly_sales = filtered_df.resample('ME', on='Order Date')['Sales'].sum().reset_index()
     fig1 = px.line(monthly_sales, x='Order Date', y='Sales', title="Monthly Revenue Trend", markers=True)
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, width='stretch')
     
     col_a, col_b = st.columns(2)
     with col_a:
         cat_sales = filtered_df.groupby('Category')['Sales'].sum().reset_index()
         fig2 = px.bar(cat_sales, x='Category', y='Sales', color='Category', title="Sales by Category")
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
         
     with col_b:
         subcat_profit = filtered_df.groupby('Sub-Category')['Profit'].sum().reset_index().sort_values('Profit')
         fig3 = px.bar(subcat_profit, x='Profit', y='Sub-Category', orientation='h', 
                       title="Profit by Sub-Category (Loss-Makers at bottom)", 
                       color='Profit', color_continuous_scale='RdYlGn')
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, width='stretch')
 
 
 # --- 2. GEOGRAPHIC HEATMAP ---
@@ -104,7 +104,7 @@ elif view == "🗺️ Geographic Heatmap":
         title=f"Total {metric} by State"
     )
     fig.update_layout(geo=dict(bgcolor='rgba(0,0,0,0)'))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     st.info("Hover over a state to see detailed performance metrics. Darker green indicates higher revenue/profit.")
 
@@ -145,14 +145,14 @@ elif view == "💎 Customer RFM Segmentation":
         segment_counts = rfm['Segment'].value_counts().reset_index()
         segment_counts.columns = ['Segment', 'Count']
         fig = px.pie(segment_counts, names='Segment', values='Count', title="Customer Distribution", hole=0.4)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
     with col2:
         st.write("### Top 'Champion' Customers")
         champions = rfm[rfm['Segment'] == 'Champions'].sort_values('Monetary', ascending=False).head(10)
         # Merge back names
         champions = champions.merge(df[['Customer ID', 'Customer Name']].drop_duplicates(), on='Customer ID')
-        st.dataframe(champions[['Customer Name', 'Recency', 'Frequency', 'Monetary']].style.format({'Monetary': '${:,.2f}'}), use_container_width=True)
+        st.dataframe(champions[['Customer Name', 'Recency', 'Frequency', 'Monetary']].style.format({'Monetary': '${:,.2f}'}), width='stretch')
 
 
 # --- 4. PREDICTIVE SALES FORECASTING ---
@@ -175,6 +175,6 @@ elif view == "🧠 Predictive Sales Forecasting":
     fig.add_trace(go.Scatter(x=forecast.index, y=forecast.values, mode='lines+markers', name='Forecasted Sales', line=dict(color='orange', dash='dash')))
     
     fig.update_layout(title=f"Revenue Forecast for Next {forecast_months} Months", xaxis_title="Date", yaxis_title="Total Sales ($)", hovermode="x unified")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     st.info("💡 **Insight:** The ML model detected strong annual seasonality, predicting significant revenue spikes every November/December.")

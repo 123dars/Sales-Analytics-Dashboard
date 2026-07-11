@@ -3,4 +3,4 @@ pandas
 plotly
 statsmodels
 scikit-learn
-numpy
+numpy<2
