@@ -5,7 +5,7 @@ An end-to-end Machine Learning web application and data analysis project built o
 ---
 
 ## 🔗 Live Demo
-- **🟢 Live Interactive Dashboard:** *(Add your Streamlit Community Cloud URL here once it finishes booting!)*
+- **🟢 Live Interactive Dashboard:** [https://sales-dashboard-123dars.streamlit.app/](https://sales-dashboard-123dars.streamlit.app/)
 
 ---
 
